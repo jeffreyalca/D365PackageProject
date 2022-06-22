@@ -2,9 +2,9 @@
 using Microsoft.Xrm.Sdk;
 using System.Text.RegularExpressions;
 
-namespace D365PackageProject
+namespace D365PackageProjectJeff
 {
-    public class PreOperationFormatPhoneCreateUpdate: IPlugin
+    public class PreOperationFormatFirstNamePhoneCreateUpdate: IPlugin
     {
         public void Execute(IServiceProvider serviceProvider)
         {
@@ -15,12 +15,19 @@ namespace D365PackageProject
 
             var entity = context.InputParameters["Target"] as Entity;
 
-            if (!entity.Attributes.Contains("telephone1"))
-                return;
+            if (entity.Attributes.Contains("telephone1"))
+            {
+                string phoneNumber = (string)entity["telephone1"];
+                var formattedNumber = Regex.Replace(phoneNumber, @"[^\d]", "");
+                entity["telephone1"] = formattedNumber;
+            }
 
-            string phoneNumber = (string)entity["telephone1"];
-            var formattedNumber = Regex.Replace(phoneNumber, @"[^\d]", "");
-            entity["telephone1"] = formattedNumber;
+            if (entity.Attributes.Contains("firstname"))
+            {
+                string firstname = (string)entity["firstname"];
+                string formattedName = firstname[0].ToString().ToUpper() + firstname.Substring(1);
+                entity["firstname"] = formattedName;
+            }
         }
     }
 }

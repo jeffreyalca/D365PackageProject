@@ -1,9 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\contoso.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>contoso1.snk</AssemblyOriginatorKeyFile>
+    <AssemblyName>D365PackageProjectJeff</AssemblyName>
+    <RootNamespace>D365PackageProjectJeff</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
